@@ -41,6 +41,7 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
                             data_loader=data_loader,
                             attack_args=attack_configs.get(key)
                             )
+        print(attack_configs.get(key))
         # predict the adversarial examples
         predictions = model.predict(data_adv)
         predictions = np.asarray([np.argmax(p) for p in predictions])
@@ -50,15 +51,20 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
 
         # plotting some examples
         num_plotting = min(data.shape[0], 0)
-        for i in range(num_plotting):
+        for i in range(10):
             img = data_adv[i].reshape((img_rows, img_cols))
             plt.imshow(img, cmap='gray')
             title = '{}: {}->{}'.format(attack_configs.get(key).get("description"),
                                         labels[i],
                                         predictions[i]
                                         )
+            desc = str(attack_configs.get(key).get("description"))
+            initial_label = str(labels[i])#AS
+            predicted_label = str(predictions[i])#AS
             plt.title(title)
-            plt.show()
+            ## TODO: Autocreate directory with model name to store examples
+            plt.savefig("../figures/"+desc+"/"+initial_label+"->"+predicted_label+".jpg")
+            # plt.show()
             plt.close()
 
         # save the adversarial example
@@ -66,7 +72,7 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
             if output_dir is None:
                 raise ValueError("Cannot save images to a none path.")
             # save with a random name
-            file = os.path.join(output_dir, "{}.npy".format(time.monotonic()))
+            file = os.path.join(output_dir, "{}.npy".format(desc))
             print("Save the adversarial examples to file [{}].".format(file))
             np.save(file, data_adv)
 
@@ -117,4 +123,4 @@ if __name__ == '__main__':
     # generate adversarial examples for a small subset
     data_bs = data_bs[:10]
     labels = labels[:10]
-    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs)
+    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir="../results")

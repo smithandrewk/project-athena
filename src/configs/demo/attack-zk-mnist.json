@@ -1,13 +1,78 @@
 {
-  "num_attacks": 2,
+  "num_attacks": 15,
   "configs0": {
     "attack": "fgsm",
-    "description": "FGSM_eps0.25",
-    "eps": 0.25
+    "description": "FGSM_eps0.1",
+    "eps": 0.1
   },
   "configs1": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.2",
+    "eps": 0.2
+  },
+  "configs2": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.3",
+    "eps": 0.3
+  },
+  "configs3": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.4",
+    "eps": 0.4
+  },
+  "configs4": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.5",
+    "eps": 0.5
+  },
+  "configs5": {
     "attack": "pgd",
-    "description": "PGD_eps0.25",
-    "eps": 0.25
+    "description": "PGD_eps0.1",
+    "eps": 0.1
+  },
+  "configs6": {
+    "attack": "pgd",
+    "description": "PGD_eps0.2",
+    "eps": 0.2
+  },
+  "configs7": {
+    "attack": "pgd",
+    "description": "PGD_eps0.3",
+    "eps": 0.3
+  },
+  "configs8": {
+    "attack": "pgd",
+    "description": "PGD_eps0.4",
+    "eps": 0.4
+  },
+  "configs9": {
+    "attack": "pgd",
+    "description": "PGD_eps0.5",
+    "eps": 0.5
+  },
+  "configs10": {
+    "attack": "jsma",
+    "description": "JSMA_eps0.1",
+    "eps": 0.1
+  },
+  "configs11": {
+    "attack": "jsma",
+    "description": "JSMA_eps0.2",
+    "eps": 0.2
+  },
+  "configs12": {
+    "attack": "jsma",
+    "description": "JSMA_eps0.3",
+    "eps": 0.3
+  },
+  "configs13": {
+    "attack": "jsma",
+    "description": "JSMA_eps0.4",
+    "eps": 0.4
+  },
+  "configs14": {
+    "attack": "jsma",
+    "description": "JSMA_eps0.5",
+    "eps": 0.5
   }
 }
