@@ -119,4 +119,4 @@ if __name__ == '__main__':
     # generate adversarial examples for a small subset
     data_bs = data_bs[:10]
     labels = labels[:10]
-    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir=model_configs.get("dir"))
+    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir=data_configs.get("dir"))
