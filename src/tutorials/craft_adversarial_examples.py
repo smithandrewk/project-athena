@@ -1,7 +1,3 @@
-"""
-A sample to generate adversarial examples.
-@author: Ying Meng (y(dot)meng201011(at)gmail(dot)com)
-"""
 
 import argparse
 import numpy as np
@@ -63,7 +59,7 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
             predicted_label = str(predictions[i])#AS
             plt.title(title)
             ## TODO: Autocreate directory with model name to store examples
-            plt.savefig("../figures/"+desc+"/"+initial_label+"->"+predicted_label+".jpg")
+            plt.savefig("../../results/figures/"+desc+"/"+initial_label+"->"+predicted_label+".jpg")
             # plt.show()
             plt.close()
 
@@ -81,13 +77,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
 
     parser.add_argument('-m', '--model-configs', required=False,
-                        default='../configs/demo/model-mnist.json',
+                        default='../configs/task1/model-mnist.json',
                         help='Folder where models stored in.')
     parser.add_argument('-d', '--data-configs', required=False,
-                        default='../configs/demo/data-mnist.json',
+                        default='../configs/task1/data-mnist.json',
                         help='Folder where test data stored in.')
     parser.add_argument('-a', '--attack-configs', required=False,
-                        default='../configs/demo/attack-zk-mnist.json',
+                        default='../configs/task1/attack-zk-mnist.json',
                         help='Folder where test data stored in.')
     parser.add_argument('-o', '--output-root', required=False,
                         default='results',
@@ -123,4 +119,4 @@ if __name__ == '__main__':
     # generate adversarial examples for a small subset
     data_bs = data_bs[:10]
     labels = labels[:10]
-    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir="../results")
+    generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir=model_configs.get("dir"))

@@ -1,0 +1,22 @@
+{
+    "dir": "../../results/",
+    "bs_file": "test_BS-mnist-clean.npy",
+    "label_file": "test_Label-mnist-clean.npy",
+    "ae_files": [
+        "FGSM_eps0.1.npy",
+        "FGSM_eps0.2.npy",
+        "FGSM_eps0.3.npy",
+        "FGSM_eps0.4.npy",
+        "FGSM_eps0.5.npy",
+        "PGD_eps0.1.npy",
+        "PGD_eps0.2.npy",
+        "PGD_eps0.3.npy",
+        "PGD_eps0.4.npy",
+        "PGD_eps0.5.npy",
+        "JSMA_eps0.1.npy",
+        "JSMA_eps0.2.npy",
+        "JSMA_eps0.3.npy",
+        "JSMA_eps0.4.npy",
+        "JSMA_eps0.5.npy"
+    ]
+}
