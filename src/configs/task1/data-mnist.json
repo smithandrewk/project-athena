@@ -8,6 +8,9 @@
         "FGSM_eps0.9.npy",
         "PGD_eps0.1.npy",
         "PGD_eps0.5.npy",
-        "PGD_eps0.9.npy"
+        "PGD_eps0.9.npy",
+        "BIM_eps0.1.npy",
+        "BIM_eps0.5.npy",
+        "BIM_eps0.9.npy"
     ]
 }

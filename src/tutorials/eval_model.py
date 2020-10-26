@@ -60,12 +60,12 @@ def evaluate(trans_configs, model_configs,
 
     # load the benign samples
     bs_file = os.path.join(data_configs.get('dir'), data_configs.get('bs_file'))
-    x_bs = np.load(bs_file)
+    x_bs = np.load(bs_file)[:500]
     img_rows, img_cols = x_bs.shape[1], x_bs.shape[2]
 
     # load the corresponding true labels
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
-    labels = np.load(label_file)
+    labels = np.load(label_file)[:500]
 
     # get indices of benign samples that are correctly classified by the targeted model
     print(">>> Evaluating UM on [{}], it may take a while...".format(bs_file))
@@ -75,33 +75,56 @@ def evaluate(trans_configs, model_configs,
     # Evaluate AEs.
     results = {}
     ae_list = data_configs.get('ae_files')
-    ae_file = os.path.join(data_configs.get('dir'), ae_list[4])
-    x_adv = np.load(ae_file)
+    UM = []
+    e = []
+    PGDADT = []
+    for i in range(len(ae_list)):
+        ae_file = os.path.join(data_configs.get('dir'), ae_list[i])
+        x_adv = np.load(ae_file)
+        print(ae_file)
+        # evaluate the undefended model on the AE
+        print(">>> Evaluating UM on [{}], it may take a while...".format(ae_file))
+        pred_adv_um = undefended.predict(x_adv)
+        err_um = error_rate(y_pred=pred_adv_um, y_true=labels, correct_on_bs=corrections)
+        # track the result
+        results['UM'] = err_um
+        UM.append(err_um)
 
-    # evaluate the undefended model on the AE
-    print(">>> Evaluating UM on [{}], it may take a while...".format(ae_file))
-    pred_adv_um = undefended.predict(x_adv)
-    err_um = error_rate(y_pred=pred_adv_um, y_true=labels, correct_on_bs=corrections)
-    # track the result
-    results['UM'] = err_um
+        # evaluate the ensemble on the AE
+        print(">>> Evaluating ensemble on [{}], it may take a while...".format(ae_file))
+        pred_adv_ens = ensemble.predict(x_adv)
+        err_ens = error_rate(y_pred=pred_adv_ens, y_true=labels, correct_on_bs=corrections)
+        # track the result
+        results['Ensemble'] = err_ens
+        e.append(err_ens)
 
-    # evaluate the ensemble on the AE
-    print(">>> Evaluating ensemble on [{}], it may take a while...".format(ae_file))
-    pred_adv_ens = ensemble.predict(x_adv)
-    err_ens = error_rate(y_pred=pred_adv_ens, y_true=labels, correct_on_bs=corrections)
-    # track the result
-    results['Ensemble'] = err_ens
+        # evaluate the baseline on the AE
+        print(">>> Evaluating baseline model on [{}], it may take a while...".format(ae_file))
+        pred_adv_bl = baseline.predict(x_adv)
+        err_bl = error_rate(y_pred=pred_adv_bl, y_true=labels, correct_on_bs=corrections)
+        # track the result
+        results['PGD-ADT'] = err_bl
+        PGDADT.append((err_bl))
 
-    # evaluate the baseline on the AE
-    print(">>> Evaluating baseline model on [{}], it may take a while...".format(ae_file))
-    pred_adv_bl = baseline.predict(x_adv)
-    err_bl = error_rate(y_pred=pred_adv_bl, y_true=labels, correct_on_bs=corrections)
-    # track the result
-    results['PGD-ADT'] = err_bl
+        # TODO: collect and dump the evaluation results to file(s) such that you can analyze them later.
+        print(">>> Evaluations on [{}]:\n{}".format(ae_file, results))
+    plt.bar(ae_list,UM)
+    plt.title("Evaluation against undefended model")
+    plt.ylabel("Error")
+    plt.xticks(rotation=45,fontsize=5)
+    plt.show()
 
-    # TODO: collect and dump the evaluation results to file(s) such that you can analyze them later.
-    print(">>> Evaluations on [{}]:\n{}".format(ae_file, results))
+    plt.bar(ae_list,e)
+    plt.title("Evaluation against vanilla athena model")
+    plt.ylabel("Error")
+    plt.xticks(rotation=45,fontsize=5)
+    plt.show()
 
+    plt.bar(ae_list,PGDADT)
+    plt.title("Evaluation against PGD-ADT model")
+    plt.ylabel("Error")
+    plt.xticks(rotation=45,fontsize=5)
+    plt.show()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
@@ -143,5 +166,5 @@ if __name__ == '__main__':
     evaluate(trans_configs=trans_configs,
              model_configs=model_configs,
              data_configs=data_configs,
-             save=False,
+             save=True,
              output_dir=args.output_root)
