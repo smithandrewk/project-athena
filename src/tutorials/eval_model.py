@@ -109,15 +109,15 @@ if __name__ == '__main__':
     """
     configurations under ``configs/demo`` are for demo.
     """
-
+    config_dir = "task1"
     parser.add_argument('-t', '--trans-configs', required=False,
-                        default='../configs/demo/athena-mnist.json',
+                        default='../configs/'+config_dir+'/athena-mnist.json',
                         help='Configuration file for transformations.')
     parser.add_argument('-m', '--model-configs', required=False,
-                        default='../configs/demo/model-mnist.json',
+                        default='../configs/'+config_dir+'/model-mnist.json',
                         help='Folder where models stored in.')
     parser.add_argument('-d', '--data-configs', required=False,
-                        default='../configs/demo/data-mnist.json',
+                        default='../configs/'+config_dir+'/data-mnist.json',
                         help='Folder where test data stored in.')
     parser.add_argument('-o', '--output-root', required=False,
                         default='results',

@@ -32,6 +32,7 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
 
     # generate attacks one by one
     for id in range(num_attacks):
+        print("STARTING NEW ATTACK")
         key = "configs{}".format(id)
         data_adv = generate(model=model,
                             data_loader=data_loader,
@@ -44,17 +45,18 @@ def generate_ae(model, data, labels, attack_configs, save=False, output_dir=None
 
         err = error_rate(y_pred=predictions, y_true=labels)
         print(">>> error rate:", err)
-
+        desc = str(attack_configs.get(key).get("description"))
         # plotting some examples
         num_plotting = min(data.shape[0], 0)
-        for i in range(10):
+        for i in range(2):
             img = data_adv[i].reshape((img_rows, img_cols))
-            plt.imshow(img, cmap='gray')
+            plt.imshow(img, cmap
+            ='gray')
             title = '{}: {}->{}'.format(attack_configs.get(key).get("description"),
                                         labels[i],
                                         predictions[i]
                                         )
-            desc = str(attack_configs.get(key).get("description"))
+
             initial_label = str(labels[i])#AS
             predicted_label = str(predictions[i])#AS
             plt.title(title)
@@ -115,8 +117,6 @@ if __name__ == '__main__':
     # load the corresponding true labels
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
     labels = np.load(label_file)
-
-    # generate adversarial examples for a small subset
-    data_bs = data_bs[:10]
-    labels = labels[:10]
+    # data_bs = data_bs[:10]
+    # labels = labels[:10]
     generate_ae(model=target, data=data_bs, labels=labels, attack_configs=attack_configs,save=True,output_dir=data_configs.get("dir"))

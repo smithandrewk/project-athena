@@ -53,7 +53,8 @@
   "configs10": {
     "attack": "jsma",
     "description": "JSMA_eps0.1",
-    "eps": 0.1
+    "theta": 0.5,
+    "gamma": 0.5
   },
   "configs11": {
     "attack": "jsma",
@@ -68,11 +69,11 @@
   "configs13": {
     "attack": "jsma",
     "description": "JSMA_eps0.4",
-    "eps": 0.4
+    "eps": 0.7
   },
   "configs14": {
     "attack": "jsma",
     "description": "JSMA_eps0.5",
-    "eps": 0.5
+    "eps": 0.9
   }
 }
