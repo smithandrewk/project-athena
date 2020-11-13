@@ -1,0 +1,11 @@
+{
+    "dir": "../../Task1/results/",
+    "bs_file": "test_BS-mnist-clean.npy",
+    "label_file": "test_Label-mnist-clean.npy",
+    "ae_files": [
+        "FGSM_eps0.1.npy",
+	"FGSM_eps0.5.npy",
+	"FGSM_eps0.9.npy",
+	"BIM_eps0.1.npy"
+    ]
+}
