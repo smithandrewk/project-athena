@@ -49,10 +49,10 @@ def generate_ae(model, data, labels, attack_configs, eot=False, save=False, outp
 
         err = error_rate(y_pred=predictions, y_true=labels)
         print(">>> error rate:", err)
-        description = str(attack_configs.get(key).get("description")) # AS
+        description = str(attack_configs.get(key).get("description")+"_"+attack_configs.get(key).get('distribution').get('transformation')) # AS
 
         # plotting some examples
-        num_plotting = min(data.shape[0], 5) # change the second number to number of samples that you want to plot, otherwise, it will plot all of them
+        num_plotting = min(data.shape[0], 0) # change the second number to number of samples that you want to plot, otherwise, it will plot all of them
         for i in range(num_plotting):
             img = data_adv[i].reshape((img_rows, img_cols))
             plt.imshow(img, cmap
@@ -143,13 +143,13 @@ if __name__ == '__main__':
     # Normal approach
     # Compute the loss w.r.t. a single input
     # For an ensemble target, averaging the losses of WDs'.
-    generate_ae(model=target,
-                data=bs, labels=labels,
-                eot=False,
-                save=True,
-                output_dir=data_configs.get('dir'),
-                attack_configs=attack_configs
-                )
+    # generate_ae(model=target,
+    #             data=bs, labels=labels,
+    #             eot=False,
+    #             save=True,
+    #             output_dir=data_configs.get('dir'),
+    #             attack_configs=attack_configs
+    #             )
 
     # Adaptive approach (with EOT)
     # Compute the loss expectation over specific distribution.

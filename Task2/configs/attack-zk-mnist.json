@@ -1,9 +1,9 @@
 {
-  "num_attacks": 2,
-  "configs0": {
+  "num_attacks": 12,
+    "configs0": {
     "attack": "fgsm",
-    "description": "FGSM_eps0.2",
-    "eps": 0.2,
+    "description": "FGSM_eps0.1",
+    "eps": 0.1,
     "distribution": {
       "num_samples": 1000,
       "transformation": "rotation",
@@ -11,12 +11,122 @@
       "max_angle": 45
     }
   },
-  "configs1": {
+      "configs1": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.1",
+    "eps": 0.1,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "translation",
+      "min_offset": -0.2,
+      "max_offset": 0.2
+    }
+  },
+    "configs2": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.3",
+    "eps": 0.3,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "rotation",
+      "min_angle": -45,
+      "max_angle": 45
+    }
+  },
+    "configs3": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.3",
+    "eps": 0.3,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "translation",
+      "min_offset": -0.2,
+      "max_offset": 0.2
+    }
+  },
+  "configs4": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.5",
+    "eps": 0.5,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "rotation",
+      "min_angle": -45,
+      "max_angle": 45
+    }
+  },
+    "configs5": {
+    "attack": "fgsm",
+    "description": "FGSM_eps0.5",
+    "eps": 0.5,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "translation",
+      "min_offset": -0.2,
+      "max_offset": 0.2
+    }
+  },
+      "configs6": {
+    "attack": "pgd",
+    "description": "PGD_eps0.1",
+    "eps": 0.1,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "rotation",
+      "min_angle": -45,
+      "max_angle": 45
+    }
+  },
+    "configs7": {
+    "attack": "pgd",
+    "description": "PGD_eps0.1",
+    "eps": 0.1,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "translation",
+      "min_offset": -0.2,
+      "max_offset": 0.2
+    }
+  },
+    "configs8": {
     "attack": "pgd",
     "description": "PGD_eps0.3",
     "eps": 0.3,
     "distribution": {
-      "num_samples": 500,
+      "num_samples": 1000,
+      "transformation": "rotation",
+      "min_angle": -45,
+      "max_angle": 45
+    }
+  },
+    "configs9": {
+    "attack": "pgd",
+    "description": "PGD_eps0.3",
+    "eps": 0.3,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "translation",
+      "min_offset": -0.2,
+      "max_offset": 0.2
+    }
+  },
+  "configs10": {
+    "attack": "PGD",
+    "description": "PGD_eps0.5",
+    "eps": 0.5,
+    "distribution": {
+      "num_samples": 1000,
+      "transformation": "rotation",
+      "min_angle": -45,
+      "max_angle": 45
+    }
+  },
+    "configs11": {
+    "attack": "pgd",
+    "description": "PGD_eps0.5",
+    "eps": 0.5,
+    "distribution": {
+      "num_samples": 1000,
       "transformation": "translation",
       "min_offset": -0.2,
       "max_offset": 0.2
