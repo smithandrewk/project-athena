@@ -10,6 +10,7 @@ from matplotlib import pyplot as plt
 
 from utils.model import load_lenet, load_pool
 from utils.file import load_from_json
+from utils.data import subsampling
 from utils.metrics import error_rate
 from attacks.attack import generate
 from models.athena import Ensemble, ENSEMBLE_STRATEGY
@@ -132,15 +133,22 @@ if __name__ == '__main__':
 
     # load the benign samples
     data_file = os.path.join(data_configs.get('dir'), data_configs.get('bs_file'))
-    bs = np.load(data_file)
+    data = np.load(data_file)
 
     # load the corresponding true labels
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
     labels = np.load(label_file)
     # option to subset samples and labels here
-    number_of_samples = 200
-    bs = bs[:number_of_samples]
-    labels = labels[:number_of_samples]
+    # number_of_samples = 200
+    # bs = bs[:number_of_samples]
+    # labels = labels[:number_of_samples]
+#    subsamples, sublabels = subsampling(data = bs,
+#                                        labels = labels,
+#                                        num_classes = 10,
+#                                        ratio = .05,
+#                                        filepath = "../results",
+#                                        filename = 'mnist')
+    
     # Normal approach
     # Compute the loss w.r.t. a single input
     # For an ensemble target, averaging the losses of WDs'.
@@ -156,7 +164,7 @@ if __name__ == '__main__':
     # Compute the loss expectation over specific distribution.
     # For an ensemble target, averaging the EOT of WDs'.
     generate_ae(model=target,
-                data=bs, labels=labels,
+                data=data, labels=labels,
                 eot=True,
                 save=True,
                 output_dir=data_configs.get('dir'),

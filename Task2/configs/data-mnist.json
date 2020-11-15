@@ -1,6 +1,8 @@
 {
     "dir": "../data/",
-    "bs_file": "BS.npy",
-    "label_file": "Labels.npy",
-    "ae_files": []
+    "bs_file": "subsamples_0.05.npy",
+    "label_file": "sublabels_0.05.npy",
+    "ae_files": [
+    	"FGSM_eps0.1_rotation.npy"
+    ]
 }
