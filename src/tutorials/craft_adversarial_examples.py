@@ -72,8 +72,7 @@ def generate_ae(model, data, labels, attack_configs,
                                                 predictions[i]
                                                 )
             plt.title(title)
-            plt.savefig("../../results/figures/"+desc+"/"+initial_label+"->"+predicted_label+".jpg")
-            # plt.show()
+            plt.show()
             plt.close()
 
         # save the adversarial example
@@ -92,13 +91,13 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--pool-configs', required=False,
                         default='../configs/demo/athena-mnist.json')
     parser.add_argument('-m', '--model-configs', required=False,
-                        default='../configs/task1/model-mnist.json',
+                        default='../configs/demo/model-mnist.json',
                         help='Folder where models stored in.')
     parser.add_argument('-d', '--data-configs', required=False,
-                        default='../configs/task1/data-mnist.json',
+                        default='../configs/demo/data-mnist.json',
                         help='Folder where test data stored in.')
     parser.add_argument('-a', '--attack-configs', required=False,
-                        default='../configs/task1/attack-zk-mnist.json',
+                        default='../configs/demo/attack-zk-mnist.json',
                         help='Folder where test data stored in.')
     parser.add_argument('-o', '--output-root', required=False,
                         default='results',

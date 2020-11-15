@@ -74,7 +74,6 @@ def generate_ae(model, data, labels, attack_configs, eot=False, save=False, outp
             # end edit
             plt.show()
             plt.close()
-
         # save the adversarial example
         if save:
             if output_dir is None:
@@ -88,6 +87,8 @@ def generate_ae(model, data, labels, attack_configs, eot=False, save=False, outp
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="")
 
+    parser.add_argument('-p', '--pool-configs', required=False,
+                        default='../configs/athena-mnist.json')
     parser.add_argument('-m', '--model-configs', required=False,
                         default='../configs/model-mnist.json',
                         help='Folder where models stored in.')
@@ -97,9 +98,6 @@ if __name__ == '__main__':
     parser.add_argument('-a', '--attack-configs', required=False,
                         default='../configs/attack-zk-mnist.json',
                         help='Folder where test data stored in.')
-    parser.add_argument('-t', '--trans-configs', required=False,
-                        default='../configs/athena-mnist.json',
-                        help='Folder where test data stored in.')
     parser.add_argument('-o', '--output-root', required=False,
                         default='results',
                         help='Folder for outputs.')
@@ -108,10 +106,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print("------AUGMENT SUMMARY-------")
+    print("POOL CONFIGS:", args.pool_configs)
     print("MODEL CONFIGS:", args.model_configs)
     print("DATA CONFIGS:", args.data_configs)
     print("ATTACK CONFIGS:", args.attack_configs)
-    print("TRANS CONFIGS:", args.trans_configs)
     print("OUTPUT ROOT:", args.output_root)
     print("DEBUGGING MODE:", args.debug)
     print('----------------------------\n')
@@ -120,10 +118,10 @@ if __name__ == '__main__':
     model_configs = load_from_json(args.model_configs)
     data_configs = load_from_json(args.data_configs)
     attack_configs = load_from_json(args.attack_configs)
-    trans_configs = load_from_json(args.trans_configs)
+    pool_configs = load_from_json(args.pool_configs)
 
     # load weak defenses into a pool
-    pool, _ = load_pool(trans_configs=trans_configs,
+    pool, _ = load_pool(trans_configs=pool_configs,
                         model_configs=model_configs,
                         active_list=True,
                         wrap=True)
@@ -139,7 +137,27 @@ if __name__ == '__main__':
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
     labels = np.load(label_file)
     # option to subset samples and labels here
-    number_of_samples = 10000
+    number_of_samples = 5
     bs = bs[:number_of_samples]
     labels = labels[:number_of_samples]
-    generate_ae(model=target, data=bs, labels=labels, eot=True,  attack_configs=attack_configs,save=True,output_dir=data_configs.get("dir"))
+    # Normal approach
+    # Compute the loss w.r.t. a single input
+    # For an ensemble target, averaging the losses of WDs'.
+    generate_ae(model=target,
+                data=bs, labels=labels,
+                eot=False,
+                save=True,
+                output_dir=data_configs.get('dir'),
+                attack_configs=attack_configs
+                )
+
+    # Adaptive approach (with EOT)
+    # Compute the loss expectation over specific distribution.
+    # For an ensemble target, averaging the EOT of WDs'.
+    generate_ae(model=target,
+                data=bs, labels=labels,
+                eot=True,
+                save=True,
+                output_dir=data_configs.get('dir'),
+                attack_configs=attack_configs
+                )

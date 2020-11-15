@@ -1,5 +1,5 @@
 {
-    "dir": "../data",
+    "dir": "../data/",
     "bs_file": "BS.npy",
     "label_file": "Labels.npy",
     "ae_files": []
