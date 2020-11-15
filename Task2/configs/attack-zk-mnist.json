@@ -1,0 +1,26 @@
+{
+  "num_attacks": 2,
+  "configs0": {
+    "attack": "pgd",
+    "description": "PGD_eps0.1",
+    "eps": 0.1,
+    "distribution":{
+	    "num_samples":500,
+	    "transformation":"translation",
+	    "min_offset":-0.2,
+	    "max_offset":0.2
+    }
+  },
+  "configs1": {
+    "attack": "pgd",
+    "description": "PGD_eps0.1",
+    "eps": 0.1,
+    "distribution":{
+	    "num_samples":2000,
+	    "transformation":"rotation",
+	    "min_angle":-180,
+	    "max_angle":180
+    
+    }
+  }
+}
