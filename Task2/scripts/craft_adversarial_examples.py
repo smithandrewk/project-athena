@@ -4,6 +4,7 @@ sys.path.append("../../src")
 import argparse
 import numpy as np
 import os
+from tqdm import tqdm
 import time
 from matplotlib import pyplot as plt
 
@@ -34,7 +35,7 @@ def generate_ae(model, data, labels, attack_configs, eot=False, save=False, outp
         labels = np.asarray([np.argmax(p) for p in labels])
 
     # generate attacks one by one
-    for id in range(num_attacks):
+    for id in tqdm(range(num_attacks)):
         print("STARTING NEW ATTACK") #AS
         key = "configs{}".format(id)
         attack_args = attack_configs.get(key)
@@ -137,7 +138,7 @@ if __name__ == '__main__':
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
     labels = np.load(label_file)
     # option to subset samples and labels here
-    number_of_samples = 5
+    number_of_samples = 200
     bs = bs[:number_of_samples]
     labels = labels[:number_of_samples]
     # Normal approach

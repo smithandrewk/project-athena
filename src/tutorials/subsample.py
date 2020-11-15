@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 An example for getting a random subsample of benign samples.
 @author: Ying Meng (y(dot)meng201011(at)gmail(dot)com)
