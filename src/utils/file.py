@@ -6,6 +6,7 @@ Implement file i/o operations.
 import csv
 from enum import Enum
 import json
+import os
 
 
 def read_list_from_file(file):
@@ -23,6 +24,7 @@ def load_from_json(file):
     :param file:
     :return:
     """
+    print(os.system("ls .."))
     with open(file, 'r') as json_file:
         dict = json.load(json_file)
 

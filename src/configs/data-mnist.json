@@ -1,0 +1,6 @@
+{
+    "dir": "Task2/data/",
+    "bs_file": "subsamples_0.05.npy",
+    "label_file": "sublabels_0.05.npy",
+    "ae_files": []
+}
