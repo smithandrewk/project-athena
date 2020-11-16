@@ -139,9 +139,9 @@ if __name__ == '__main__':
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
     labels = np.load(label_file)
     # option to subset samples and labels here
-    # number_of_samples = 200
-    # bs = bs[:number_of_samples]
-    # labels = labels[:number_of_samples]
+    #number_of_samples = 5
+    #data = data[:number_of_samples]
+    #labels = labels[:number_of_samples]
 #    subsamples, sublabels = subsampling(data = bs,
 #                                        labels = labels,
 #                                        num_classes = 10,
