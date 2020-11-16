@@ -1,6 +1,19 @@
 {
     "dir": "../data/",
-    "bs_file": "BS.npy",
-    "label_file": "Labels.npy",
-    "ae_files": []
+    "bs_file": "subsamples_0.05.npy",
+    "label_file": "sublabels_0.05.npy",
+    "ae_files": [
+    	"FGSM_eps0.1_rotation.npy",
+    	"FGSM_eps0.1_translation.npy",
+    	"FGSM_eps0.3_rotation.npy",
+    	"FGSM_eps0.3_translation.npy",
+    	"FGSM_eps0.5_rotation.npy",
+    	"FGSM_eps0.5_translation.npy",
+    	"PGD_eps0.1_rotation.npy",
+    	"PGD_eps0.1_translation.npy",
+    	"PGD_eps0.3_rotation.npy",
+    	"PGD_eps0.3_translation.npy",
+    	"PGD_eps0.5_rotation.npy",
+    	"PGD_eps0.5_translation.npy"
+    ]
 }

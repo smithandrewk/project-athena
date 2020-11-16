@@ -30,6 +30,7 @@ Method attack and extends it to other norms, therefore it is called the Fast Gra
 
 import logging
 import numpy as np
+from tqdm import tqdm
 
 from art.config import ART_NUMPY_DTYPE
 from art.classifiers.classifier import ClassifierGradients
@@ -363,7 +364,7 @@ class FastGradientMethod(EvasionAttack):
             x_adv = x.astype(ART_NUMPY_DTYPE)
 
         # Compute perturbation with implicit batching
-        for batch_id in range(int(np.ceil(x.shape[0] / float(self.batch_size)))):
+        for batch_id in tqdm(range(int(np.ceil(x.shape[0] / float(self.batch_size))))):
             batch_index_1, batch_index_2 = batch_id * self.batch_size, (batch_id + 1) * self.batch_size
             batch = x_adv[batch_index_1:batch_index_2]
             batch_labels = y[batch_index_1:batch_index_2]
