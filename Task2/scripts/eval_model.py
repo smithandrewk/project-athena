@@ -60,12 +60,13 @@ def evaluate_cnn(trans_configs, model_configs,
 
     # load the benign samples
     bs_file = os.path.join(data_configs.get('dir'), data_configs.get('bs_file'))
-    x_bs = np.load(bs_file)[500]
+    print(bs_file)
+    x_bs = np.load(bs_file)[:500]
     print(x_bs.shape)
     img_rows, img_cols = x_bs.shape[1], x_bs.shape[2]
     # load the corresponding true labels
     label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
-    labels = np.load(label_file)[500]
+    labels = np.load(label_file)[:500]
 
     # get indices of benign samples that are correctly classified by the targeted model
     print(">>> Evaluating UM on [{}], it may take a while...".format(bs_file))
@@ -111,19 +112,25 @@ def evaluate_cnn(trans_configs, model_configs,
     plt.bar(ae_list,UM)
     plt.title("Evaluation against undefended model")
     plt.ylabel("Error")
-    plt.xticks(rotation=45,fontsize=5)
+    plt.xticks(rotation=45,fontsize=8)
+    plt.gcf().set_size_inches(15, 10)
+    plt.savefig('undefended.jpg',dpi=100,bbox_inches='tight')
     plt.show()
 
     plt.bar(ae_list,e)
     plt.title("Evaluation against vanilla athena model")
     plt.ylabel("Error")
-    plt.xticks(rotation=45,fontsize=5)
+    plt.xticks(rotation=45,fontsize=8)
+    plt.gcf().set_size_inches(15, 10)
+    plt.savefig('vanilla.jpg',dpi=100,bbox_inches='tight',)
     plt.show()
 
     plt.bar(ae_list,PGDADT)
     plt.title("Evaluation against PGD-ADT model")
     plt.ylabel("Error")
-    plt.xticks(rotation=45,fontsize=5)
+    plt.xticks(rotation=45,fontsize=8)
+    plt.gcf().set_size_inches(15, 10)
+    plt.savefig('pgd-adt.jpg',dpi=100,bbox_inches='tight')
     plt.show()
 
 if __name__ == '__main__':
