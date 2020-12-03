@@ -132,34 +132,24 @@ if __name__ == '__main__':
     target = Ensemble(classifiers=wds, strategy=ENSEMBLE_STRATEGY.AVEP.value)
 
     # load the benign samples
-    data_file = os.path.join(data_configs.get('dir'), data_configs.get('bs_file'))
-    data = np.load(data_file)
+    # data_file = os.path.join(data_configs.get('dir'), data_configs.get('bs_file'))
+    # data = np.load(data_file)
 
-    # load the corresponding true labels
-    label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
-    labels = np.load(label_file)
+    # # load the corresponding true labels
+    # label_file = os.path.join(data_configs.get('dir'), data_configs.get('label_file'))
+    # labels = np.load(label_file)
+
     # option to subset samples and labels here
-    #number_of_samples = 5
-    #data = data[:number_of_samples]
-    #labels = labels[:number_of_samples]
-#    subsamples, sublabels = subsampling(data = bs,
-#                                        labels = labels,
-#                                        num_classes = 10,
-#                                        ratio = .05,
-#                                        filepath = "../results",
-#                                        filename = 'mnist')
-    
-    # Normal approach
-    # Compute the loss w.r.t. a single input
-    # For an ensemble target, averaging the losses of WDs'.
-    # generate_ae(model=target,
-    #             data=bs, labels=labels,
-    #             eot=False,
-    #             save=True,
-    #             output_dir=data_configs.get('dir'),
-    #             attack_configs=attack_configs
-    #             )
+    # data, labels = subsampling(data = data,
+    #                         labels = labels,
+    #                         num_classes = 10,
+    #                         ratio = .05,
+    #                         filepath = "../results",
+    #                         filename = '')
 
+    # load saved subsamples
+    data = np.load(os.path.join(data_configs.get('dir'),"subsamples_0.05.npy"))
+    labels = np.load(os.path.join(data_configs.get('dir'),"sublabels_0.05.npy"))
     # Adaptive approach (with EOT)
     # Compute the loss expectation over specific distribution.
     # For an ensemble target, averaging the EOT of WDs'.
