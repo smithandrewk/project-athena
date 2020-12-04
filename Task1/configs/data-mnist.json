@@ -4,8 +4,13 @@
     "label_file": "test_Label-mnist-clean.npy",
     "ae_files": [
         "FGSM_eps0.1.npy",
-	"FGSM_eps0.5.npy",
-	"FGSM_eps0.9.npy",
-	"BIM_eps0.1.npy"
+        "FGSM_eps0.5.npy",
+        "FGSM_eps0.9.npy",
+        "BIM_eps0.1.npy",
+        "BIM_eps0.5.npy",
+        "BIM_eps0.9.npy",
+        "PGD_eps0.1.npy",
+        "PGD_eps0.5.npy",
+        "PGD_eps0.9.npy"
     ]
 }
